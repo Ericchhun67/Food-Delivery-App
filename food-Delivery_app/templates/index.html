@@ -1,0 +1,124 @@
+<!-- Role of index.html
+	•	Acts as the landing page for your app.
+	•	Lets users log in or register.
+	•	Connects to auth.js for login/register logic.
+	•	Uses styles.css for layout (center form, logo placement).
+	•	On success → redirects to dashboard.html.
+
+⸻
+
+ What Files index.html Links To
+	•	CSS
+	•	static/css/styles.css → styling for form + logo + responsive layout.
+	•	JS
+	•	static/js/auth.js → handles login/logout/register logic.
+	•	Backend
+	•	routes/auth.py → processes login/register requests. -->
+	
+	
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1.0">
+        <!-- tab title-->
+        <title> Food Delivery App - Login</title>
+        <!-- link to auth.js for login/register logic-->
+        <link rel="stylesheet" href={{ url_for('static', filename='css/styles.css')}}>
+        <!-- use {{ url_for('static', filename='js/auth.js')}} to link when using flask-->
+       <script src="{{ url_for('static', filename='js/auth.js')}}"></script>
+        
+        <script>
+        // handle login submit when user clicks login button after 
+        // filling out username and password
+        document.addEventListener('DOMContentLoaded', function () {
+            var form = document.getElementById('login-form');
+            // check if form exists before adding event listener
+            if (form) {
+                // if form exists add event listener
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault(); // prevent default form submission
+                    // get username and password values
+                    var username = document.getElementById('username').value;
+                    var password = document.getElementById('password').value;
+                    var rememberMe = document.getElementById('remember-me').checked;
+                    // call login function from auth.js
+                    if (typeof login === 'function') {
+                        login(username, password, rememberMe);
+                    }
+                    // redirect to dashboard after login
+                    window.location.href ='/dashboard';
+                });
+            }
+        });
+        </script>
+        <script>
+            // Handle register button click to go to register page
+            document.addEventListener('DOMContentLoaded', function () {
+            // Add event listener to register button
+            var btn = document.getElementById('register-button');
+            // check if button exists before adding event listener
+            if (btn) {
+                // if button exists add event listener
+                btn.addEventListener('click', function () {
+                // get the register page when clicked
+                window.location.href = '/food-Delivery_app/templates/register.html';
+            });
+        }
+    });
+    </script>
+    </head>
+    <body>
+        <div class="login-container">
+            <h2> Food Delivery App login </h2>
+            <form id="login-form">
+                <label for="username"> Username: </label>
+                <input type="text" id="username" name="username" required>
+                <label for="password"> Password: </label>
+                <input type="password" id="password" name="password" required>
+                <div class="remember-me ">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me"> remember me </label>
+                       <script>
+                        // Handle "remember me " functionality
+                        document.addEventListener('DOMContentLoaded', function () {
+                            var rememberMeCheckbox = document.addEventListener('remember-me');
+                            var savedUsername = localStorage.getItem('rememberedUsername');
+                            if (savedUsername){
+                                document.getElementById('username').value = savedUsername;
+                                rememberMeCheckbox.checked = true;
+                            }
+                            // Listen for changes to the checkbox
+                            rememberMeCheckbox.addEventListener('change', function () {
+                                if (this.checked) {
+                                    var username = document.addEventListener('username').value;
+                                    localStorage.setItem('rememberedUsername', username);
+                                } else {
+                                    localStorage.removeItem('rememberedUsername');
+                                }
+                            }})
+                        </script>
+                    <button type="submit"> Login </button>
+                    <button type="button" id="register-button"> register </button>
+                    <script>
+                        // register button click handled calling the register 
+                        // register html page
+                        document.getElementById('register-button').addEventListener('click', function () {
+                            window.location.href = '/register'})
+                    </script>
+                    
+                </div>
+            </div>
+            </form>
+        </body>
+        <footer>
+            <p>@2025 Food Delivery App. All rights reserved.</p>
+        </footer>
+</html>
+
+
+
+
+
+
+

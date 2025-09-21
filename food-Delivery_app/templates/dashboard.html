@@ -1,0 +1,85 @@
+<!--
+    This page is what the user sees after logging in. It’s not just static HTML; it’s tied to Flask and your static JS/CSS files.
+
+⸻
+
+🔗 What it links to
+	•	app.py → renders dashboard.html through the /dashboard route.
+	•	static/css/styles.css → for layout, positioning of nav bar and username.
+	•	static/js/dashboard.js → handles charts, dynamic updates, dropdown menus.
+	•	routes/auth.py → provides user session/login info (so we know the username).
+	•	models/user.py → stores usernames (to display “Welcome, EricChhu”).
+
+ Expanded description
+	•	Top-left navigation bar: links like Home, Restaurants, Cart, Orders.
+	•	Top-right user menu: text → “Welcome, {{ username }}”; clicking it shows dropdown → Profile, Transaction History, Logout.
+	•	Main body: customer actions → browse restaurants, see menus, add to cart.
+	•	JS connection: dashboard.js updates UI elements (charts, dropdown, maybe live order status).
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+</head>
+<body class="dashboard"> 
+    <!-- Top navigation bar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="/dashboard">Home</a>
+            <a href="/restaurants">Restaurants</a>
+            <a href="/cart">Cart</a>
+            <a href="/orders">Orders</a>
+        </div>
+        <div class="nav-right">
+            <div class="user-menu">
+                <button class="user_button"> Welcome, {{ username }} </button>
+                <div class="dropdown-content" id="user-dropdown">
+                    <script>
+                        // Handle dropdown menu toggle
+                        document.addEventListener('DOMContentLoaded', function () {
+                            var userButton = document.addEventListener('user_button');
+                            var dropdown = document.getElementById('user-dropdown');
+                            if (userButtib) {
+                                userButton.addEventListener('click', function () {
+                                    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+                                    });}});}})
+                    </script>
+                    <!-- link profile.html file-->
+                    <a href="{{ url_for('profile') }}"> Profile</a>
+                    <a href="/transations"> Transaction History</a>
+                    <a href="/track-order"> Track Order</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- dashboard main -->
+    <main class="dashboard-main">
+        <h3> Browser Restaurants </h3>
+        <div id="restaurants-list">
+            <!--
+                Restaurants cards will be loaded here
+                Each card will have restaurants name, cuisine, rating, and a button to view menu
+            -->
+            <div class="restaurant-card">
+                <h4>Restaurants Name </h4>
+                <p>cuisine: </p>
+                <p>rating: </p>
+                <button class="view-menu button">View Menu</button>
+            </div>
+        </div>
+        <!-- add restaurant links and pictures -->
+        <div id="restaurant-links">
+            <a href="/restaurant">
+                <img src="{{ url_for('static', filename='img/restaurant1.png')}}">
+    </main>
+            
+
+</body>
+</html>

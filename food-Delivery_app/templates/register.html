@@ -1,0 +1,56 @@
+<!--
+    This page is dedicated to new users signing up for your Food Delivery App.
+What it links to
+	•	styles.css (static/css/styles.css) → positions and styles the registration form.
+	•	auth.js (static/js/auth.js) → captures form submission and sends data to Flask via fetch().
+	•	routes/auth.py → backend route (/auth/register) that processes the registration request.
+	•	models/user.py → where the new user record (username, email, password hash) gets stored.
+	•	database.db → the actual SQLite DB where the user info is saved.
+
+⸻
+Expanded Description
+	•	Provides fields for username, email, password, and confirm password.
+	•	Has built-in validation (via auth.js or HTML5 form validation).
+	•	On successful submission → calls the Flask backend to create a user.
+	•	If registration succeeds → redirect to login page (index.html) or dashboard.
+	•	If it fails (e.g., username taken, passwords don’t match) → shows an error message.
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Register</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+	<script src="{{ url_for('static', filename='js/auth.js') }}" defer></script>
+</head>
+<body>
+	<main>
+		<h2>Register</h2>
+
+		<!-- If using an 'auth' Blueprint with url_prefix='/auth', this resolves to /auth/register -->
+		<form id="register-form" method="POST" action="{{ url_for('auth.register') }}">
+			<label for="username">Username:</label>
+			<input type="text" id="username" name="username" required autocomplete="username"><br>
+
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" required autocomplete="email"><br>
+
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" required autocomplete="new-password"><br>
+
+			<label for="confirm_password">Confirm Password:</label>
+			<input type="password" id="confirm_password" name="confirm_password" required autocomplete="new-password"><br>
+
+			<button type="submit">Register</button>
+		</form>
+
+		<p>Already have an account? <a href="{{ url_for('auth.login') }}">Login</a></p>
+		<p id="error-message" style="color: red;"></p>
+	</main>
+</body>
+</html>
+
+

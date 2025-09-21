@@ -1,0 +1,140 @@
+/* center the login */
+
+body {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: beige;
+    /* add a border around the login */
+    border: 2px solid black;
+    border-radius: 1px;
+    box-shadow: 0 4px 8px black;
+    background-color: aqua;
+
+}
+
+footer {
+     /* 
+        move the footer to the bottom of the page
+     */
+     position:fixed;
+     bottom:0;
+        width: 100%;
+        
+}
+
+.dashboard {
+    background-color: bisque;
+}
+
+
+main {
+    text-align: center;
+    margin-bottom: 20px;
+    
+    
+}
+
+/* login form */
+.login-container {
+    width: 500px;
+    height: 500px;
+    padding: 20px;
+    background-color: sandybrown;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px black;
+}
+
+.login-container button:hover {
+    background: #45a049;
+}
+
+.login-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* dashboard */
+/* navbar layout */
+
+.navbar {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: bisque;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px black;
+    color:bisque;
+    margin-bottom: auto;
+}
+
+.nav-left a {
+    margin-right: 15px;
+    color:black;
+    text-decoration: none; 
+    font-weight: bold;
+}
+
+
+.nav-left a:hover {
+    text-decoration: underline;
+    color:bisque;
+    
+}
+
+.nav-right a {
+    margin-left: 15px;
+    color:black;
+    text-decoration:none;
+    font-weight: bold;
+}
+
+
+.nav-right a:hover {
+    text-decoration: underline;
+    color:black;
+}
+
+/* register page */
+.register-form {
+    width: 400px;
+    margin: 50px auto;
+    padding:20px;
+    background-color: sandybrown;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px black;
+    margin-right: 20px;
+}
+
+/* 
+    register form input
+*/
+.register-form input {
+    width:90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius:5px;
+    border:1px snow;
+    
+}
+
+.restaurant-card {
+    text-align: center;
+    border-radius: 10px;;
+}

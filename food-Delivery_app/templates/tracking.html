@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Tracking</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script>
+    // Dynamically load the tracking.js file
+    (function () {
+      const s = document.createElement('script');
+      s.src = "{{ url_for('static', filename='js/tracking.js') }}";
+      s.defer = true;
+      s.onload = () => {
+        if (typeof window.startTracking === 'function') {
+          window.startTracking({ orderId: {{ order_id }} });
+        }
+      };
+      document.head.appendChild(s);
+    })();
+    
+
+    async function fetchLocation(orderId) {
+      const response = await fetch(`/tracking/get/${orderId}`);
+      if (response.ok) {
+        const data = await response.json();
+        document.getElementById("location").innerText =
+          `Driver ${data.driver_id}: (${data.latitude}, ${data.longitude}) @ ${data.timestamp}`;
+      } else {
+        document.getElementById("location").innerText = "No tracking data yet.";
+      }
+    }
+
+    // Poll every 5 seconds
+    setInterval(() => fetchLocation({{ order_id }}), 5000);
+
+    // Fetch once on initial load
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchLocation({{ order_id }});
+    });
+  </script>
+</head>
+<body>
+    <!--
+        let users input and Id to track their order
+    -->
+    <input type="text" id="order-id-input" placeholder="Enter Order ID">
+    <button id="track-order-button">Track Order</button>
+
+    <script>
+        function loadTracking() {
+            return new Promise((resolve, reject) => {
+                if (typeof window.startTracking === 'function') return resolve();
+                const s = document.createElement('script');
+                s.src = "{{ url_for('static', filename='js/tracking.js') }}";
+                s.defer = true;
+                s.onload = resolve;
+                s.onerror = reject;
+                document.head.appendChild(s);
+            });
+        }
+
+        document.getElementById('track-order-button').addEventListener('click', async () => {
+            const orderId = document.getElementById('order-id-input').value.trim();
+            if (!orderId) {
+                alert('Please enter a valid Order ID.');
+                return;
+            }
+
+            try {
+                await loadTracking();
+                if (typeof window.startTracking === 'function') {
+                    window.startTracking({ orderId: Number(orderId) || orderId });
+                }
+                if (typeof fetchLocation === 'function') {
+                    fetchLocation(orderId);
+                }
+                const h2 = document.querySelector('h2');
+                if (h2) h2.textContent = `Tracking Order #${orderId}`;
+            } catch (e) {
+                alert('Failed to load tracking.js.');
+            }
+        });
+    </script>
+    
+  <h2>Tracking Order #{{ order_id }}</h2>
+  <p id="location">Loading driver location...</p>
+</body>
+</html>

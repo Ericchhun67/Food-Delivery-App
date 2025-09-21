@@ -1,0 +1,27 @@
+<!--
+    Profile page that displays user information.
+    this page is linked to: dashboard.html
+
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Register</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+	<script src="{{ url_for('static', filename='js/auth.js') }}" defer></script>
+</head>
+
+<body>
+    <main>
+        <h2> Profile Page </h2>
+        <p> Username: {{ username }} </p>
+        <p> Email: {{ email }} </p>
+        <a href="/dashboard"> Back to Dashboard </a>
+    </main>
+</body>
+</html>
+        
