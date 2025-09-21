@@ -1,4 +1,3 @@
 # Food-Delivery-App
 This project is a full-stack food delivery platform built with python(flask), HTML, CSS, and Javascript. It simulates a real- world delivery system where users can: Register &amp; login securely to access their accounts. Browse restaurants and menu, adding items to a cart for checkout. Place and track orders in real time. 	Use a dashboard that displays order status and quick actions. The backend is powered by Flask + SQLAlchemy to manage users, orders, and tracking, while the frontend uses HTML, CSS, and JS for a responsive and interactive user experience. This project demonstrates how to connect backend APIs with frontend logic, integrate user authentication, and implement live order tracking—similar to real apps like DoorDash or UberEats.
-<img width="2056" height="1067" alt="Screenshot 2025-09-20 at 9 48 05 PM" src="https://github.com/user-attachments/assets/3d877405-fbfd-48fd-9c1f-65a5c10bb566" />
-<img width="2056" height="1067" alt="Screenshot 2025-09-20 at 9 48 57 PM" src="https://github.com/user-attachments/assets/9770efb9-756a-47af-98d8-5789370172f8" />
+
